@@ -1,0 +1,25 @@
+# Water Level Sensor Control
+
+class WaterLevelSensor:
+    def __init__(self, max_level):
+        self.max_level = max_level
+        self.current_level = 0
+
+    def update_level(self, level):
+        self.current_level = level
+        self.check_floodgate()
+
+    def check_floodgate(self):
+        if self.current_level >= self.max_level:
+            self.open_floodgate()
+
+    def open_floodgate(self):
+        print("Floodgate opened!")
+
+# Example usage
+sensor = WaterLevelSensor(max_level=100)
+
+# Simulating water level updates
+sensor.update_level(50)
+sensor.update_level(100)  # This will trigger the floodgate
+sensor.update_level(120)  # Floodgate remains open
