@@ -1,0 +1,57 @@
+# ATM Program
+
+import java.util.Scanner;
+
+public class ATM {
+    private static final int PIN = 1234;
+    private static double balance = 1000.00;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your PIN: ");
+        int enteredPin = scanner.nextInt();
+
+        if (enteredPin == PIN) {
+            boolean exit = false;
+            while (!exit) {
+                System.out.println("1. Check Balance");
+                System.out.println("2. Deposit");
+                System.out.println("3. Withdraw");
+                System.out.println("4. Exit");
+                System.out.print("Select an option: ");
+                int option = scanner.nextInt();
+
+                switch (option) {
+                    case 1:
+                        System.out.println("Your balance is: $" + balance);
+                        break;
+                    case 2:
+                        System.out.print("Enter amount to deposit: ");
+                        double deposit = scanner.nextDouble();
+                        balance += deposit;
+                        System.out.println("Deposited: $" + deposit);
+                        break;
+                    case 3:
+                        System.out.print("Enter amount to withdraw: ");
+                        double withdraw = scanner.nextDouble();
+                        if (withdraw <= balance) {
+                            balance -= withdraw;
+                            System.out.println("Withdrawn: $" + withdraw);
+                        } else {
+                            System.out.println("Insufficient funds.");
+                        }
+                        break;
+                    case 4:
+                        exit = true;
+                        System.out.println("Thank you for using the ATM.");
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
+                }
+            }
+        } else {
+            System.out.println("Incorrect PIN. Access denied.");
+        }
+        scanner.close();
+    }
+}
